@@ -216,7 +216,8 @@ namespace BackProp
             // 2. Run the heavy training loop on a background thread using Task.Run
             await Task.Run(() =>
             {
-                for (int i = 0; i < 5000; i++)
+                int epochs = 5000;
+                for (int i = 0; i < epochs; i++)
                 {
                     for (int j = 0; j < pixelData.Length; j++)
                     {
@@ -224,7 +225,7 @@ namespace BackProp
                     }
                     nn.setDesiredOutput(0, 0);
                     nn.learn();
-                    Console.WriteLine($"Training iteration {i + 1}/5000 completed.");
+                    Console.WriteLine($"Training iteration {i + 1}/{epochs} completed.");
                 }
             });
 
@@ -247,6 +248,15 @@ namespace BackProp
             }
             nn.run();
             textBox4.Text = nn.getOutputData(0).ToString();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //Open form 2
+            Form2 f2 = new Form2();
+            f2.Show();
+            //Hide this form
+            this.Hide();
         }
     }
 }
